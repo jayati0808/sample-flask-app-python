@@ -1,0 +1,106 @@
+<!doctype html>
+<title>Flaskr</title>
+
+
+<head>
+    <title>Crud Application</title>
+    <link href="{{url_for('static', filename = 'css/bootstrap.min.css')}}" rel="stylesheet">
+<link rel="shortcut icon" href="{{url_for('static', filename = 'teacher.png' )}}">
+
+<script language="JavaScript">
+		function showInput() {
+		document.getElementById('display').innerHTML = 
+		document.getElementById("user_input").value;
+		}
+		</script>
+</head>
+
+<body>
+<div class="container">
+
+    <div class="well text-center">
+        <h1>Sentiment Analysis using Active Learning</h1>
+    </div>
+
+<div class="container">
+    <div class="row">
+        <div class="col md-12">
+            <h3>Please label the data with the suitable sentiment.<a class="pull-right centre" href="{{ url_for('show_entries')}}">Results</a> </h3>
+        </div>
+   </div>
+</div>
+
+
+
+<form>
+<div class="col-sm-4 row">
+  <select class="form-control" id="env-select" name='myfield' onchange='this.form.submit()'>
+  <option value="">-- Select --</option>
+{% for activeData in activeDatas %}
+<option value="Env">{{activeData.username}}</option>
+{% endfor  %}     
+  </select>
+<input type="submit" value ="submit" onclick="showInput();" ><br/>
+  </div>
+</form>
+
+
+
+
+
+ <table class="table table-striped">
+
+                <tr>
+              <th>Text</th>
+              <th>Positive</th>
+              <th>Negative</th>
+	      <th>Neutral</th>
+          </tr>
+
+  {% for activeData in activeDatas %}
+               
+<tr>
+<td>{{activeData.username}}</td>
+<style scoped> 
+   h1 {
+     color: FireBrick;
+   }
+   p { 
+     color: SaddleBrown; 
+   } 
+#col:hover {
+
+   background-color: green;
+
+}
+ </style> 
+<!--<td><a href="{{ url_for('edit_page', id=activeData.id)}}" class="btn btn-warning btn-xs" data-toggle="modal">Edit</a></td>-->
+<!--<td><a href="{{ url_for('delete_page', id=activeData.id)}}" class="btn btn-warning btn-xs" data-toggle="modal">Delete</a></td>-->
+<td><a href="{{ url_for('positive_page', id=activeData.id)}}" id="col" class="btn btn-primary btn-xs" data-toggle="modal">Positive</a></td>
+<td>  <a href="{{ url_for('negative_page', id=activeData.id)}}" id="col" class="btn btn-danger btn-xs" data-toggle="modal">Negative</a></td>
+<td>  <a href="{{ url_for('neutral_page', id=activeData.id)}}" id="col" class="btn btn-warning btn-xs" data-toggle="modal">Neutral</a></td>
+</tr>
+ {% endfor  %}
+</table>
+
+ <div class="well">
+        <p>Engineering Ingegneria Informatica
+            <span class="pull-right">Bologna,Italy</span>
+        </p>
+    </div>
+
+<script>
+$('#env-select').on('change', function(e){
+        var source = $(this),
+            val = $.trim(source.val());
+	console.log("value is : " + val);
+            
+ 
+    });
+</script>
+</body>
+</html>
+
+<script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+
+<script type="text/javascript" src="{{url_for('static', filename = 'js/bootstrap.min.js')}}"></script>

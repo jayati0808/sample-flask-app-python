@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>results will be here</title>
+<h1> Results will be here </h1>
+<script>
+var _data = {};
+        var _data = {"Env":{"dev":"Development","test":"Test"},"Org":{"dev":"Development Org","test":"Test Org"}};
+</script>
+
+<style>
+.highlight {
+  background-color: yellow;
+}
+</style>
+</head>
+
+<body>
+<div class="col-sm-4 row">
+  <select class="form-control" id="env-select">
+  <option value="">-- Select --</option>
+       <option value="Env">Env</option>
+      <option value="Org">Orgnisation</option>
+      
+  </select>
+  </div>
+  
+
+<button onclick="highlight('fox')">Highlight</button>
+
+<div id="inputText">
+  The fox went over the fence
+</div>
+
+
+<script>
+function highlight(text) {
+  var inputText = document.getElementById("inputText");
+  var innerHTML = inputText.innerHTML;
+  var index = innerHTML.indexOf(text);
+  if (index >= 0) { 
+   innerHTML = innerHTML.substring(0,index) + "<span class='highlight'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
+   inputText.innerHTML = innerHTML;
+  }
+}
+</script>
+<script>
+$('#env-select').on('change', function(e){
+        var source = $(this),
+            val = $.trim(source.val());
+	console.log("value is : " + val);
+            
+ 
+    });
+</script>
+</body>
+</html>
